@@ -21,10 +21,10 @@
     /* Font */
     --font-family: 'Inter', sans-serif;
 
-    --font-title: 700 24px/32px;
-    --font-label: 600 16px/20px;
-    --font-paragraph: 500 16px/20px;
-    --font-link: 500 14px/16px;
+    --font-title: 700 24px/30px var(--font-family);
+    --font-label: 600 16px/20px var(--font-family);
+    --font-paragraph: 500 16px/20px var(--font-family);
+    --font-link: 500 14px/16px var(--font-family);
 }
 
 * {
@@ -37,8 +37,12 @@ ul {
     list-style: none;
 }   
 
-body {
-    font-family: var(--font-family);
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--color-brand);
 }
 
 header {
@@ -55,4 +59,74 @@ header {
     max-width: 627px;
     margin: 0 auto;
     padding: 25px;
+}
+
+.return {
+    display: inline-block;
+
+    font: var(--font-link);
+    color: var(--color-brand);
+    cursor: pointer;
+
+    margin-bottom: 16px;
+}
+
+.return:hover {
+    color: var(--color-brand-hover);
+}
+
+.list-title {
+    font: var(--font-title);
+    color: var(--color-content-primary);
+
+    margin-bottom: 44px;
+}
+
+#shopping-list {
+    display: flex;
+    gap: 16px;
+}
+
+@media (max-width: 627px) {
+    #shopping-list {
+        flex-direction: column;
+    }
+}
+
+#shopping-list input {
+    flex: 3;
+
+    padding: 12px 18px;
+
+    border: 2px solid var(--color-border-primary);
+}
+
+#shopping-list input:hover {
+    border-color: var(--color-border-hover);
+}
+
+#shopping-list input:focus {
+    outline: none;
+    border-color: var(--color-brand);
+}
+
+#shopping-list button {
+    flex: 1;
+
+    padding: 12px 24px;
+
+    color: var(--color-always-white);
+    background-color: var(--color-brand);
+    cursor: pointer;
+    border: none;
+}
+
+#shopping-list button:hover {
+    background-color: var(--color-brand-hover);
+}
+
+#shopping-list input, #shopping-list button {
+    font: var(--font-label);
+
+    border-radius: 12px;
 }
