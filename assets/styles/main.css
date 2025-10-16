@@ -1,3 +1,32 @@
+:root {
+    /* Background */
+    --color-bg-primary: #F4F5FB;
+    --color-bg-secondary: #FFFFFF;
+
+    /* Brand */
+    --color-brand: #CA3884;
+    --color-brand-hover: #A52C6B;
+    --color-danger: #C93847;
+
+    /* Content */
+    --color-content-primary: #080B12;
+    --color-content-secondary: #374151;
+    --color-content-tertiary: #9CA3AF;
+    --color-always-white: #FFFFFF;
+    
+    /* Border */
+    --color-border-primary: #D1D5DB;
+    --color-border-hover: #B9C2D0;
+
+    /* Font */
+    --font-family: 'Inter', sans-serif;
+
+    --font-title: 700 24px/32px;
+    --font-label: 600 16px/20px;
+    --font-paragraph: 500 16px/20px;
+    --font-link: 500 14px/16px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,4 +35,24 @@
 
 ul {
     list-style: none;
+}   
+
+body {
+    font-family: var(--font-family);
+}
+
+header {
+    text-align: center;
+}
+
+@media (max-width: 627px) {
+    header {
+        display: none;
+    }
+}
+
+.container {
+    max-width: 627px;
+    margin: 0 auto;
+    padding: 25px;
 }
