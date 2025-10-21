@@ -142,6 +142,15 @@ header {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    max-height: 580px;
+    overflow-y: auto;
+    /* scrollbar-gutter: stable both-edges; */
+}
+
+#list::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 .list__item {
