@@ -149,7 +149,7 @@ header {
     align-items: center;
     gap: 12px;
 
-    padding: 8px 12px;
+    padding: 16px 12px;
     border-radius: 12px;
 
     background: var(--color-always-white);
@@ -165,8 +165,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 16px;
+    height: 16px;
 }
 
 .list__item-delete {
