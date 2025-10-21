@@ -1,3 +1,5 @@
+@import url(./customCheckBox.css);
+
 :root {
     /* Background */
     --color-bg-primary: #F4F5FB;
@@ -23,7 +25,7 @@
 
     --font-title: 700 24px/30px var(--font-family);
     --font-label: 600 16px/20px var(--font-family);
-    --font-paragraph: 500 16px/20px var(--font-family);
+    --font-paragraph: 500 16px/24px var(--font-family);
     --font-link: 500 14px/16px var(--font-family);
 }
 
@@ -31,6 +33,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    background: var(--color-bg-primary);
 }
 
 ul {
@@ -85,6 +91,7 @@ header {
 #shopping-list {
     display: flex;
     gap: 16px;
+    margin-bottom: 40px;
 }
 
 @media (max-width: 627px) {
@@ -129,4 +136,39 @@ header {
     font: var(--font-label);
 
     border-radius: 12px;
+}
+
+#list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.list__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px 12px;
+    border-radius: 12px;
+
+    background: var(--color-always-white);
+
+    font: var(--font-paragraph);
+}
+
+.list__item-description {
+    flex: 1;
+}
+
+.list__item-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.list__item-delete {
+    cursor: pointer;
 }
