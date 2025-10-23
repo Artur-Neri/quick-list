@@ -13,7 +13,11 @@
 ## Como rodar
 1. git clone https://github.com/Artur-Neri/quicklist.git
 2. cd quicklist
-3. npx http-server -c-1 . && open http://127.0.0.1:8080
+3. npm install
+4. npx http-server -c-1 . && open http://127.0.0.1:8080
+
+## Testes
+- Estou usando o Jest para os testes unitários. Para rodar os testes é só rodar ```npm test``` no terminal.
 
 ## Funcionalidades
 - Criar, marcar como concluída e remover tarefas
