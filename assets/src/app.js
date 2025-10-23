@@ -85,7 +85,7 @@ function initForm() {
 
         const newItemNameField = document.getElementById('new-item_description');
         const newItemName = newItemNameField.value.trim();
-        
+
         if (isValidItemName(newItemName)) {
             hideHint();
             addItem(localDataBase.shoppingList, newItemName);
