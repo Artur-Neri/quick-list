@@ -5,7 +5,7 @@
 
 
 ## One‑liner
-- Todo simples em HTML/CSS/JS que salva no localStorage — exercício de aprendizado e demo rápida.
+- Lista de mercado simples em HTML/CSS/JS que salva no localStorage — exercício de aprendizado e demo rápida.
 
 ## Demo
 - URL: https://quick-list-gray.vercel.app/
