@@ -30,4 +30,4 @@
 
 ## Contato
 - GitHub: https://github.com/Artur-Neri
-- LinkedIn: (adicione seu link aqui)
+- LinkedIn: http://linkedin.com/in/artur-neri
