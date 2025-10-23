@@ -83,10 +83,12 @@ function initForm() {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        if (isValidItemName()) {
+        const newItemNameField = document.getElementById('new-item_description');
+        const newItemName = newItemNameField.value.trim();
+        
+        if (isValidItemName(newItemName)) {
             hideHint();
-            const newItemNameField = document.getElementById('new-item_description');
-            addItem(localDataBase.shoppingList, newItemNameField.value.trim());
+            addItem(localDataBase.shoppingList, newItemName);
             clearNewItemInput(newItemNameField);
         } else {
             showHint();

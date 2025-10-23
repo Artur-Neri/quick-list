@@ -1,6 +1,5 @@
-export function isValidItemName() {
-    const newItemName = document.getElementById('new-item_description').value.trim();
-    return newItemName !== '';
+export function isValidItemName(itemName) {
+    return itemName !== '';
 }
 
 export function clickedOnCheckbox(event) {
