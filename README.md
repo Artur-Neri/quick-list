@@ -20,7 +20,7 @@
 - Estou usando o Jest para os testes unitários. Para rodar os testes é só rodar ```npm test``` no terminal.
 
 ## Funcionalidades
-- Criar, marcar como concluída e remover tarefas
+- Criar, marcar como concluída e remover itens
 - Persistência no navegador via localStorage
 
 ## Tecnologias
