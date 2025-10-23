@@ -1,4 +1,5 @@
 @import url(./customCheckBox.css);
+@import url(./hint.css);
 
 :root {
     /* Background */
@@ -100,9 +101,14 @@ header {
     }
 }
 
-#shopping-list input {
+.shopping-list__input__container {
     flex: 3;
 
+    position: relative;
+}
+
+#shopping-list input {
+    width: 100%;
     padding: 12px 18px;
 
     border: 2px solid var(--color-border-primary);
@@ -136,6 +142,10 @@ header {
     font: var(--font-label);
 
     border-radius: 12px;
+}
+
+#new-item_description {
+    position: relative;
 }
 
 #list {

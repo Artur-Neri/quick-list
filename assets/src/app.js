@@ -1,120 +1,122 @@
-const form = document.querySelector('#shopping-list');
-const itemDescriptionInput = document.querySelector('#new-item_description');
+import { clearNewItemInput, showHint, hideHint } from './utils/uiHelpers.js';
+import { isValidItemName, clickedOnCheckbox, clickedOnDeleteButton } from './utils/validations.js';
 
-const itemsList = document.querySelector('#list');
-
-let dbItemsList = [];
-
-function clearFields() {
-    itemDescriptionInput.value = '';
-}
-
-function handleCheckBoxClick(element) {
-    const itemIndex = Array.from(itemsList.children).indexOf(element.parentElement);
-    if (dbItemsList[itemIndex].checked) {
-        dbItemsList[itemIndex].checked = false;
-    } else {
-        dbItemsList[itemIndex].checked = true;
-    }
-    element.classList.toggle('list__item-check--checked');
-    
-    saveNewList();
-}
-
-function handleDeleteButton(deleteBtn) {
-    const itemIndex = Array.from(itemsList.children).indexOf(deleteBtn.parentElement);
-    dbItemsList.splice(itemIndex, 1);
-    deleteBtn.parentElement.remove();
-    
-    saveNewList();
-}
-
-function addNewItem(itemDescription) {
+function addItem(shoppingList, itemName) {
     const newItem = {
-        description: itemDescription,
-        checked: false
+        id: Date.now(),
+        name: itemName,
+        checked: false,
     }
 
-    addToDb(newItem);
-    addToHtml(newItem);
+    shoppingList.push(newItem); // Adding to database
+    localStorage.setItem('storedDataBase', JSON.stringify(localDataBase));
 
-    saveNewList();
+    renderShoppingList(shoppingList);
 }
 
-function saveNewList() {    
-    localStorage.setItem("dbShoppingList", JSON.stringify(dbItemsList));
+function getItemById(shoppingList, itemId) {
+    return shoppingList.find(item => item.id == itemId);
 }
 
-function addToDb(item) {
-    dbItemsList.push(item);
+function removeItemById(shoppingList, itemId) {
+    const item = getItemById(shoppingList, itemId);
+    const itemIndex = shoppingList.indexOf(item);
+    shoppingList = shoppingList.splice(itemIndex, 1);
 }
 
-function addToHtml(item) {
-    const newItem = document.createElement('li');
-    newItem.classList.add('list__item');
+function renderShoppingList(shoppingList) {
+    const itemsList = document.getElementById('list');
+    itemsList.innerHTML = '';
 
-    const checkBox = document.createElement('span');
-    checkBox.classList.add('list__item-check');
+    shoppingList.forEach(shopItem => {
+        const newItem = document.createElement('li');
+        newItem.classList.add('list__item');
+        newItem.setAttribute('data-id', shopItem.id);
 
-    if (item.checked) {
-        checkBox.classList.add('list__item-check--checked');
-    }
+        const checkBox = document.createElement('span');
+        checkBox.classList.add('list__item-check');
 
-    const newItemDescription = document.createElement('span');
-    newItemDescription.textContent = item.description;
-    newItemDescription.classList.add('list__item-description');
+        if (shopItem.checked) {
+            checkBox.classList.add('list__item-check--checked');
+        }
 
-    const deleteButton = document.createElement('span');
-    deleteButton.classList.add('list__item-delete');
+        const newItemDescription = document.createElement('span');
+        newItemDescription.textContent = shopItem.name;
+        newItemDescription.classList.add('list__item-description');
 
-    const deleteButtonIcon = document.createElement('img');
-    deleteButtonIcon.src = './assets/images/delete.svg';
-    deleteButtonIcon.alt = 'Delete Icon';
-    deleteButtonIcon.width = '16';
+        const deleteButton = document.createElement('span');
+        deleteButton.classList.add('list__item-delete');
 
-    deleteButton.append(deleteButtonIcon);
+        const deleteButtonIcon = document.createElement('img');
+        deleteButtonIcon.src = './assets/images/delete.svg';
+        deleteButtonIcon.alt = 'Delete Icon';
+        deleteButtonIcon.width = '16';
 
-    newItem.append(checkBox, newItemDescription, deleteButton);
+        deleteButton.append(deleteButtonIcon);
 
-    itemsList.append(newItem);
+        newItem.append(checkBox, newItemDescription, deleteButton);
+
+        itemsList.append(newItem);
+    });    
 }
 
-function handleFormSubmit() {
-    const itemDescription = itemDescriptionInput.value;
-
-    if (itemDescription !== '' ){
-        addNewItem(itemDescription);
-    }
+function handleCheckClick(checkBoxElement) {
+    const listItem = checkBoxElement.closest('.list__item');
+    const itemId = listItem.getAttribute('data-id');
+    const item = getItemById(localDataBase.shoppingList, itemId);
+    item.checked = !item.checked;
+    
+    localStorage.setItem('storedDataBase', JSON.stringify(localDataBase));
 }
 
-function readShoppingListFromDb() {
-    const dbShoppingList = localStorage.getItem("dbShoppingList");
-    if (dbShoppingList) {
-        dbItemsList = JSON.parse(dbShoppingList);
-    }
+function handleDeleteClick(deleteButtonElement) {
+    const listItem = deleteButtonElement.closest('.list__item');
+    const itemId = listItem.getAttribute('data-id');
+    removeItemById(localDataBase.shoppingList, itemId);
+    
+    localStorage.setItem('storedDataBase', JSON.stringify(localDataBase));
 }
 
-function init() {
-    readShoppingListFromDb();
-    if (dbItemsList.length > 0) {
-        dbItemsList.forEach(element => {
-            addToHtml(element)
-        });
-    }
+function initForm() {
+    const form = document.getElementById('shopping-list');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (isValidItemName()) {
+            hideHint();
+            const newItemNameField = document.getElementById('new-item_description');
+            addItem(localDataBase.shoppingList, newItemNameField.value.trim());
+            clearNewItemInput(newItemNameField);
+        } else {
+            showHint();
+        }
+    });
 }
 
-init()
+function initShoppingList(){
+    renderShoppingList(localDataBase.shoppingList);
 
-form.addEventListener('submit', (e)=> {
-    e.preventDefault()
-    handleFormSubmit();
-    clearFields();
-})
+    const itemsList = document.getElementById('list');
+    
+    itemsList.addEventListener('click', (event) => {
+        if (clickedOnCheckbox(event)) {
+            handleCheckClick(event.target);
+            renderShoppingList(localDataBase.shoppingList);
+        } else if (clickedOnDeleteButton(event)) {
+            handleDeleteClick(event.target);
+            renderShoppingList(localDataBase.shoppingList);
+        }
+    });
+}
 
-itemsList.addEventListener('click', (e)=>{
-    if (e.target.classList.contains('list__item-check')) {
-        handleCheckBoxClick(e.target);
-    } else if ((e.target.classList.contains('list__item-delete')) || (e.target.parentElement.classList.contains('list__item-delete'))) {
-        handleDeleteButton(e.target.parentElement);
-    }
-})
+function loadLocalDataBase() {
+    return localStorage.getItem('storedDataBase') ?
+           JSON.parse(localStorage.getItem('storedDataBase')) :
+           { shoppingList: [] };
+}
+
+let localDataBase = loadLocalDataBase();
+
+initForm();
+initShoppingList();

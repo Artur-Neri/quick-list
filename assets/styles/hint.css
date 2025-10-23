@@ -1,0 +1,18 @@
+.hint {
+    position: absolute;
+    font: var(--font-link);
+
+    color: var(--color-danger);
+    font-size: 0.9em;
+
+    left: 10px;
+    bottom: -15px;
+}
+
+p.hint {
+    font-size: 10px;
+}
+
+.hint--hidden {
+    display: none;
+}

@@ -20,13 +20,16 @@
         <h1 class="list-title">Compras da semana</h1>
 
         <form id="shopping-list">
-            <input autocomplete="off" type="text" name="new-item" id="new-item_description" placeholder="Adicione um novo item">
+            <div class="shopping-list__input__container">
+                <input autocomplete="off" type="text" name="new-item" id="new-item_description" placeholder="Adicione um novo item">
+                <p class="hint hint--hidden">Conteúdo inválido. Verifique!</p>
+            </div>
             <button type="submit">Adicionar item</button>
         </form>
 
         <ul id="list">
         </ul>
     </main>
-    <script src="./assets/src/app.js"></script>
+    <script type="module" src="./assets/src/app.js"></script>
 </body>
 </html>
